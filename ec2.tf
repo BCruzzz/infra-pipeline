@@ -3,7 +3,7 @@ resource "aws_instance" "meu-website-server" {
   instance_type          = "t3.micro"
   key_name               = "meu-website-key"
   vpc_security_group_ids = [aws_security_group.meu-website-sg.id]
-  iam_instance_profile = aws_iam_instance_profile.ecr_readonly_profile.name
+  iam_instance_profile = "EC2-ECR-Role"
 
   tags = {
     Name        = "meu-website-server"
