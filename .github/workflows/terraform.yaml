@@ -12,8 +12,8 @@ on:
           - false
 
 permissions:
-id-token: write
-contents: read
+ id-token: write
+ contents: read
           
 jobs:
   job1:
