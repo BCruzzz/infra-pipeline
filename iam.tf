@@ -22,8 +22,3 @@ resource "aws_iam_role_policy_attachment" "ecr_readonly_attach" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
-# Criar o Instance Profile
-resource "aws_iam_instance_profile" "ecr_readonly_profile" {
-  name = "ECRReadOnlyInstanceProfile"
-  role = aws_iam_role.ecr_readonly_role.name
-}
