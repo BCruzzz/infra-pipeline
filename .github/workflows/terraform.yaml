@@ -1,0 +1,50 @@
+name: Terraform CI/CD
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Executar o apply em prod?'
+        required: true
+        default: 'false'
+        type: choice
+        options:
+          - true
+          - false
+
+permissions:
+id-token: write
+contents: read
+          
+jobs:
+  job1:
+    name: Terraform CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5.1.0 # Or a specific version
+        with:
+          role-to-assume: arn:aws:iam::896244883665:role/GitHubInfraRole
+          aws-region: us-east-1
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v3.1.2  
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format
+        run: terraform fmt
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan 
+        if: github.evento.inputs.apply == 'true'     
+      
