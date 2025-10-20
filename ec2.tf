@@ -1,5 +1,5 @@
 resource "aws_instance" "meu-website-server" {
-  ami                    = "ami-052064a798f08f0d3" # Amazon Linux 2 AMI
+  ami                    = "ami-0341d95f75f311023" # Amazon Linux 2 AMI (HVM), SSD Volume Type - us-east-1
   instance_type          = "t3.micro"
   key_name               = "meu-website-key"
   vpc_security_group_ids = [aws_security_group.meu-website-sg.id]
