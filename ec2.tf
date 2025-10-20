@@ -4,6 +4,7 @@ resource "aws_instance" "meu-website-server" {
   key_name               = "meu-website-key"
   vpc_security_group_ids = [aws_security_group.meu-website-sg.id]
   iam_instance_profile = "EC2-ECR-Role"
+  user_data = file("user_data.sh")
 
   tags = {
     Name        = "meu-website-server"
